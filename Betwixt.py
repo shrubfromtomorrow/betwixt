@@ -58,7 +58,13 @@ print(str(country1Lon), end="\n\n")
 
 print(country2)
 print(str(country2Lat), end=", ")
-print(str(country2Lon))
+print(str(country2Lon), end="\n\n")
+
+middleLat = round((country1Lat + country2Lat) / 2, 4)
+middleLon = round((country1Lon + country2Lon) / 2, 4)
+
+print(f"Middle: {str(middleLat)}", end=", ")
+print(str(middleLon), end="\n\n")
 
 country1LatRad = country1Lat / 57.29577951
 country2LatRad = country2Lat / 57.29577951
@@ -73,7 +79,7 @@ a = sin(dlat / 2)**2 + cos(country1LatRad) * cos(country2LatRad) * sin(dlon / 2)
 c = 2 * asin(sqrt(a))
 r = 6378
 distance = c*r
-print(str(distance))
+print(f"Distance Betwixt(tm): {str(distance)}")
 
 #
 # countryLat = {"England": 51.5, "Italy": 41.9}
