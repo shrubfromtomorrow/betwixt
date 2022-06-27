@@ -30,6 +30,8 @@ df = pd.DataFrame(data, columns= ['CountryName','CapitalLatitude', 'CapitalLongi
 countryName = []
 countryLat = {}
 countryLon = {}
+countryNums = {}
+countryNum = []
 
 for row in range(206):
     countryName.append(df.iloc[row, 0])
@@ -37,11 +39,11 @@ for row in range(206):
     countryLat[f"{df.iloc[row, 0]}"] = round(df.iloc[row, 1], 4)
 for row in range(206):
     countryLon[f"{df.iloc[row, 0]}"] = round(df.iloc[row, 2], 4)
+for row in range(206):
+    countryNums[round(round(df.iloc[row, 1], 4) + round(df.iloc[row, 2], 4), 4)] = f"{df.iloc[row, 0]}"
+for row in range(206):
+    countryNum.append(round(round(df.iloc[row, 1], 4) + round(df.iloc[row, 2], 4), 4))
 
-# country = countryName[0]
-# print(countryName[0])
-# print(str(countryLat[f"{country}"]), end=", ")
-# print(str(countryLon[f"{country}"]))
 
 country1 = random.choice(countryName)
 country2 = random.choice(countryName)
@@ -63,6 +65,11 @@ print(str(country2Lon), end="\n\n")
 middleLat = round((country1Lat + country2Lat) / 2, 4)
 middleLon = round((country1Lon + country2Lon) / 2, 4)
 
+middleNum = round(middleLat + middleLon, 4)
+
+min = min(countryNum, key=lambda x:abs(x-middleNum))
+
+
 print(f"Middle: {str(middleLat)}", end=", ")
 print(str(middleLon), end="\n\n")
 
@@ -79,7 +86,12 @@ a = sin(dlat / 2)**2 + cos(country1LatRad) * cos(country2LatRad) * sin(dlon / 2)
 c = 2 * asin(sqrt(a))
 r = 6378
 distance = c*r
-print(f"Distance Betwixt(tm): {str(distance)}")
+print(f"Distance Betwixt(tm): {str(distance)}", end="\n\n")
+print(f"Closest: {countryNums[min]}")
+print(str(countryLat[countryNums[min]]), end=", ")
+print(str(countryLon[countryNums[min]]))
+
+
 
 #
 # countryLat = {"England": 51.5, "Italy": 41.9}
